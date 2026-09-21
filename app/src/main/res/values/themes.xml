@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.D88" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/d88_primary</item>
+        <item name="colorOnPrimary">@color/d88_on_primary</item>
+        <item name="colorPrimaryContainer">@color/d88_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/d88_on_primary_container</item>
+        <item name="colorSecondary">@color/d88_secondary</item>
+    </style>
+</resources>

@@ -1,5 +1,26 @@
 # D88 Private Device Fabric
 
+> ## Status: Prototyp 0.1.0 umgesetzt
+>
+> Diese README ist die Architektur-Spezifikation. Die **Implementierung**
+> liegt in diesem Repository als Android-Projekt (Kotlin):
+>
+> - `docs/IMPLEMENTATION-STATUS.md` – was umgesetzt/verifiziert/offen ist (ehrlich)
+> - `docs/TECHNICAL-DOCUMENTATION.md` – Architektur, Kette, Build & Tests
+> - `docs/SECURITY.md` – Threat Model, Human-Gate-Semantik, Schlüsselverwaltung
+> - `docs/ROADMAP.md` – Meilensteine M0–M4
+> - `docs/QUERY-WORKERS.md` – Agent-Runtime/Worker-Design
+> - `docs/RELEASE-CHECK.md` – Release- und Signing-Vorbereitung
+>
+> **Build:** GitHub Actions (`.github/workflows/build.yml`) → Unit-Tests +
+> Debug-APK als Artefakt. Release-Signing vorbereitet, signiert ausschließlich
+> über Repository-Secrets.
+>
+> **Kernprinzip unverändert:** *Verbunden ≠ vertrauenswürdig ≠ autorisiert ≠
+> ausführungsberechtigt.*
+
+---
+
 ## 1. Zweck
 
 D88 ist eine private, nicht-kommerzielle, lokal-first Agentenplattform.

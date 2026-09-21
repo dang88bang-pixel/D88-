@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">D88</string>
+    <string name="app_title">D88 · Private Device Fabric</string>
+
+    <string name="tab_dashboard">Dashboard</string>
+    <string name="tab_chat">Chat</string>
+    <string name="tab_devices">Geräte</string>
+    <string name="tab_approvals">Freigaben</string>
+    <string name="tab_observatory">Observatory</string>
+
+    <string name="simulation_banner">SIMULATION – diese Geräte sind Demo-Daten, keine echten Geräte.</string>
+    <string name="sys_status">Systemstatus</string>
+    <string name="stat_devices">Geräte</string>
+    <string name="stat_approvals">Offene Freigaben</string>
+    <string name="stat_sessions">Aktive Sessions</string>
+    <string name="my_devices">MEINE GERÄTE</string>
+    <string name="btn_security">Security</string>
+    <string name="btn_knowledge">Wissen / RAG</string>
+
+    <string name="chat_title">Agent-Chat</string>
+    <string name="chat_hint">Aufgabe senden (z. B. „Messdaten in Projekt Werkstatt analysieren“)</string>
+    <string name="btn_send">Senden</string>
+
+    <string name="approvals_title">Human Gate – offene Freigaben</string>
+    <string name="btn_deny">ABLEHNEN</string>
+    <string name="btn_approve">FREIGEBEN</string>
+
+    <string name="observatory_title">Live Observatory</string>
+    <string name="btn_verify">Audit-Kette verifizieren</string>
+    <string name="tasks_title">Tasks</string>
+    <string name="audit_title">Causal Audit</string>
+
+    <string name="security_title">Policy &amp; Status</string>
+    <string name="privacy_title">Lokale Datenschutz-Defaults</string>
+    <string name="matrix_title">Rollenmatrix</string>
+
+    <string name="knowledge_title">Wissen / RAG (lokal)</string>
+    <string name="kb_search_hint">Lokale Suche (z. B. „Human Gate“)</string>
+    <string name="btn_search">Suchen</string>
+
+    <string name="detail_baseline">Basisrechte der Rolle</string>
+    <string name="detail_actions">Verwaltungsaktionen (wird auditiert)</string>
+    <string name="btn_suspend">Suspendieren</string>
+    <string name="btn_block">Sperren</string>
+    <string name="btn_revoke">Vertrauen widerrufen</string>
+    <string name="btn_remove">Gerät entfernen</string>
+    <string name="btn_role_client">Rolle: CLIENT</string>
+    <string name="btn_role_gast">Rolle: GAST</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="d88_primary">#1A237E</color>
+    <color name="d88_on_primary">#FFFFFF</color>
+    <color name="d88_primary_container">#C5CAE9</color>
+    <color name="d88_on_primary_container">#000D3C</color>
+    <color name="d88_secondary">#00695C</color>
+    <color name="d88_background">#FAFAFA</color>
+    <color name="d88_surface">#FFFFFF</color>
+    <color name="d88_on_surface">#1C1B1F</color>
+    <color name="d88_dark_background">#121212</color>
+    <color name="d88_dark_surface">#1E1E1E</color>
+</resources>
