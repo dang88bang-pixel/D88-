@@ -45,7 +45,8 @@ jobs:
             (tail -n 120 d88-test.log) || true
             echo '```'
           } > d88-failure.md || true
-          CR=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs" --jq '.jobs[0].check_run.id' 2>/dev/null) || CR=""
+          CRURL=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs" --jq '.jobs[0].check_run_url' 2>/dev/null) || CRURL=""
+          CR=$(printf '%s' "$CRURL" | grep -oE '[0-9]+$') || CR=""
           if [ -n "$CR" ]; then
             MSG=$(head -c 60000 d88-failure.md)
             gh api -X POST "repos/$GITHUB_REPOSITORY/check-runs/$CR/annotations" \
