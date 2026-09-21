@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  GRADLE_OPTS: "-Dorg.gradle.console=plain"
+
 jobs:
   build:
     name: Unit Tests + Debug APK
@@ -24,12 +27,55 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Unit tests (reine JVM-Kernlogik)
-        run: ./gradlew :app:testDebugUnitTest --stacktrace
+        run: set -o pipefail; ./gradlew :app:testDebugUnitTest --stacktrace 2>&1 | tee d88-test.log
 
       - name: Build debug APK
-        run: ./gradlew :app:assembleDebug --stacktrace
+        if: success()
+        run: set -o pipefail; ./gradlew :app:assembleDebug --stacktrace 2>&1 | tee -a d88-test.log
+
+      - name: Fehler-Auszug (nur bei Fehler)
+        if: failure()
+        run: |
+          {
+            echo "## D88 Build – Fehler-Auszug (Gradle)"
+            echo '```'
+            grep -nE "^e: |error:|FAILED|What went wrong|Caused by|Unresolved reference|> Task .* FAILED|Execution failed" d88-test.log | head -60
+            echo "---- letzter Kontext ----"
+            tail -n 40 d88-test.log
+            echo '```'
+          } > d88-failure.md
+          python3 - <<'PY'
+          import json, os, urllib.request
+          repo = os.environ["GITHUB_REPOSITORY"]
+          run_id = os.environ["GITHUB_RUN_ID"]
+          token = os.environ["GITHUB_TOKEN"]
+          # Check-Run-ID des aktuellen Jobs holen
+          req = urllib.request.Request(
+              f"https://api.github.com/repos/{repo}/actions/runs/{run_id}/jobs",
+              headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"})
+          with urllib.request.urlopen(req) as r:
+              jobs = json.load(r)["jobs"]
+          check_run_id = jobs[0].get("check_run", {}).get("id")
+          if not check_run_id:
+              print("Keine Check-Run-ID gefunden"); raise SystemExit(0)
+          text = open("d88-failure.md").read()[:60000]
+          payload = json.dumps({"output": {
+              "title": "D88 Build fehlgeschlagen – Fehler-Auszug",
+              "summary": text,
+              "text": text
+          }}).encode()
+          patch = urllib.request.Request(
+              f"https://api.github.com/repos/{repo}/check-runs/{check_run_id}",
+              data=payload, method="PATCH",
+              headers={"Authorization": f"Bearer {token}",
+                       "Accept": "application/vnd.github+json",
+                       "Content-Type": "application/json"})
+          with urllib.request.urlopen(patch) as r:
+              print("Fehler-Auszug in Check-Run geschrieben, HTTP", r.status)
+          PY
 
       - name: Upload debug APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: d88-debug-apk

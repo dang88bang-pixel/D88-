@@ -7,13 +7,13 @@ plugins {
 
 // Release-Signing ausschließlich über Umgebungsvariablen (CI Secrets).
 // Kein Key im Repository, kein generierter Key, kein Fake-Signing.
-val keystorePath: String? = System.getenv("D88_KEYSTORE_PATH")
-val keystorePass: String? = System.getenv("D88_KEYSTORE_PASS")
-val keyAlias: String? = System.getenv("D88_KEY_ALIAS")
-val keyPass: String? = System.getenv("D88_KEY_PASS")
+val d88KeystorePath: String? = System.getenv("D88_KEYSTORE_PATH")
+val d88KeystorePass: String? = System.getenv("D88_KEYSTORE_PASS")
+val d88KeyAlias: String? = System.getenv("D88_KEY_ALIAS")
+val d88KeyPass: String? = System.getenv("D88_KEY_PASS")
 val releaseSigningAvailable =
-    keystorePath != null && keystorePass != null && keyAlias != null && keyPass != null &&
-        File(keystorePath).exists()
+    d88KeystorePath != null && d88KeystorePass != null && d88KeyAlias != null && d88KeyPass != null &&
+        File(d88KeystorePath).exists()
 
 android {
     namespace = "de.d88.platform"
@@ -30,10 +30,10 @@ android {
     signingConfigs {
         if (releaseSigningAvailable) {
             create("release") {
-                storeFile = File(keystorePath!!)
-                storePassword = keystorePass!!
-                keyAlias = keyAlias!!
-                keyPassword = keyPass!!
+                storeFile = File(d88KeystorePath!!)
+                storePassword = d88KeystorePass!!
+                keyAlias = d88KeyAlias!!
+                keyPassword = d88KeyPass!!
             }
         }
     }
